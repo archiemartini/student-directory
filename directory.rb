@@ -1,5 +1,14 @@
 @students = []
 
+def load_students
+    file = File.open("students.csv", "r")
+    file.readlines.each do |line|
+        name, cohort = line.chomp.split(',')
+            @students << {name: name, cohort: cohort.to_sym}
+        end
+    file.close
+end
+
 def input_students
     
     puts "Please enter the names of the students"
@@ -34,7 +43,8 @@ end
 def print_menu
     puts "1. Input the students"
     puts "2. Show the students"
-    puts "7. Save"
+    puts "3. Save"
+    puts "4. Load"
     puts "9. Exit"
 end
 
@@ -50,8 +60,10 @@ def interactive_menu
         input_students
         when "2"
         show_students
-        when "7"
+        when "3"
         save_students
+        when "4"
+        load_students
         when "9"
         exit
         else
